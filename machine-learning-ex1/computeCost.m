@@ -13,7 +13,9 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
+% (1/2m) * sum(pow2((theta0 + x*theta1) - y))
 
+J = (1.0/(2*m)) * sum(power(X*theta - y, 2));
 
 
 
