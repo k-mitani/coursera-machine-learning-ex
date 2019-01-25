@@ -82,7 +82,7 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.01;
+alpha = 0.005;
 num_iters = 400;
 
 % Init Theta and Run Gradient Descent 
@@ -92,6 +92,7 @@ theta = zeros(3, 1);
 % Plot the convergence graph
 figure;
 plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+
 xlabel('Number of iterations');
 ylabel('Cost J');
 
