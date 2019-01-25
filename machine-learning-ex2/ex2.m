@@ -33,20 +33,20 @@ X = data(:, [1, 2]); y = data(:, 3);
 fprintf(['Plotting data with + indicating (y = 1) examples and o ' ...
          'indicating (y = 0) examples.\n']);
 
-plotData(X, y);
+%plotData(X, y);
 
 % Put some labels 
-hold on;
+%hold on;
 % Labels and Legend
-xlabel('Exam 1 score')
-ylabel('Exam 2 score')
+%xlabel('Exam 1 score')
+%ylabel('Exam 2 score')
 
 % Specified in plot order
-legend('Admitted', 'Not admitted')
-hold off;
+%legend('Admitted', 'Not admitted')
+%hold off;
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%fprintf('\nProgram paused. Press enter to continue.\n');
+%pause;
 
 
 %% ============ Part 2: Compute Cost and Gradient ============
@@ -83,7 +83,7 @@ fprintf(' %f \n', grad);
 fprintf('Expected gradients (approx):\n 0.043\n 2.566\n 2.647\n');
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 %% ============= Part 3: Optimizing using fminunc  =============
@@ -107,20 +107,20 @@ fprintf('Expected theta (approx):\n');
 fprintf(' -25.161\n 0.206\n 0.201\n');
 
 % Plot Boundary
-plotDecisionBoundary(theta, X, y);
+%plotDecisionBoundary(theta, X, y);
 
 % Put some labels 
-hold on;
+%hold on;
 % Labels and Legend
-xlabel('Exam 1 score')
-ylabel('Exam 2 score')
+%xlabel('Exam 1 score')
+%ylabel('Exam 2 score')
 
 % Specified in plot order
-legend('Admitted', 'Not admitted')
-hold off;
+%legend('Admitted', 'Not admitted')
+%hold off;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% ============== Part 4: Predict and Accuracies ==============
 %  After learning the parameters, you'll like to use it to predict the outcomes
@@ -141,7 +141,7 @@ fprintf(['For a student with scores 45 and 85, we predict an admission ' ...
          'probability of %f\n'], prob);
 fprintf('Expected value: 0.775 +/- 0.002\n\n');
 
-% Compute accuracy on our training set
+  % Compute accuracy on our training set
 p = predict(theta, X);
 
 fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
