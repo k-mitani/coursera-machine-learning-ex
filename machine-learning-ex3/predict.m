@@ -21,12 +21,11 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
-
-
-
-
-
-
+XBiased = [ones(m, 1) X];
+A1 = sigmoid(XBiased * Theta1');
+A1Biased = [ones(size(A1, 1), 1) A1];
+A2 = sigmoid(A1Biased * Theta2');
+[_, p] = max(A2, [], 2)
 
 
 % =========================================================================

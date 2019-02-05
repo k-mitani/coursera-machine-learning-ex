@@ -36,9 +36,14 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+hyp = sigmoid(X * theta);
+thetaNoBias = theta;
+thetaNoBias(1) = 0;
 
+J = 1 / m * sum(- y .* log(hyp) - (1 - y) .* log(1 - hyp)) \
+  + lambda / (2 * m) * thetaNoBias' * thetaNoBias;
 
-
+grad = 1 / m * X' * (hyp - y) + lambda / m * thetaNoBias;
 
 
 
