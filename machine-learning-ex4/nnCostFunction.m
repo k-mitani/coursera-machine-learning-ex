@@ -59,28 +59,44 @@ Theta2_grad = zeros(size(Theta2));
 %         Hint: You can implement this around the code for
 %               backpropagation. That is, you can compute the gradients for
 %               the regularization separately and then add them to Theta1_grad
-%               and Theta2_grad from Part 2.
+%               and Theta2_grad from Part 2. 
 %
 
+# J‚ğ‹‚ß‚é
+Xbiased = [ones(size(X, 1), 1) X]; # (5000, 401)
+Z2 = Xbiased * Theta1';
+A2 = sigmoid(Z2); # (5000, 25)
+A2biased = [ones(size(A2, 1), 1) A2]; # (5000, 26)
+Z3 = A2biased * Theta2'; # (5000, 10)
+A3 = sigmoid(Z3); # (5000, 10)
 
+# y‚ğOneHot‰»‚·‚é
+yOneHot = zeros(m, num_labels);
+for i = 1:m
+  yOneHot(i, y(i)) = 1;
+endfor
 
+# J (without Regularization term)‚ğ‹‚ß‚é
+JwithoutRt = 1 / m * sum(sum(-yOneHot .* log(A3) - (1 - yOneHot) .* log(1 - A3)));
 
+# Regularization term‚ğ‹‚ß‚éB
+Theta1WithoutBias = Theta1(:, 2:end);
+Theta2WithoutBias = Theta2(:, 2:end);
+rt = lambda / (2 * m) * (sum(sum(Theta1WithoutBias .* Theta1WithoutBias)) + sum(sum(Theta2WithoutBias .* Theta2WithoutBias)));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+J = JwithoutRt + rt;
 % -------------------------------------------------------------
+
+# delta3‚ğ‹‚ß‚é (5000, 10)
+Delta3 = A3 - yOneHot;
+# delta2‚ğ‹‚ß‚é (5000, 26)
+Delta2 = Delta3 * Theta2 .* sigmoidGradient([ones(size(Z2, 1), 1) Z2]);
+# bias‚ğœ‚­ (5000, 25)
+Delta2 = Delta2(:, 2:end);
+# grad‚ğ‹‚ß‚é (10, 26)
+Theta2_grad = 1 / m .* (Delta3' * A2biased) + lambda / m .* [zeros(size(Theta2, 1), 1) Theta2(:, 2:end)];
+# grad‚ğ‹‚ß‚é (25, 401)
+Theta1_grad = 1 / m .* (Delta2' * Xbiased) + lambda / m .* [zeros(size(Theta1, 1), 1) Theta1(:, 2:end)];
 
 % =========================================================================
 
