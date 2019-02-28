@@ -53,10 +53,18 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
+theta_ini = zeros(size(X, 2), 1);
+for i = 1:m
+  Xtrain = X(1:i, :);
+  ytrain = y(1:i);
+  
+  options = optimset('MaxIter', 50);
+  costFunction = @(p) linearRegCostFunction(Xtrain, ytrain, p, lambda);
+  [theta, cost] = fmincg(costFunction, theta_ini, options);
 
-
-
-
+  error_train(i) = linearRegCostFunction(Xtrain, ytrain, theta, 0);
+  error_val(i)   = linearRegCostFunction(Xval, yval, theta, 0);
+endfor
 
 
 % -------------------------------------------------------------
