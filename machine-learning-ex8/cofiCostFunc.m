@@ -40,10 +40,16 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+Hyp = X * Theta';
+Resi = (Hyp - Y) .* R;
+reguCost = lambda / 2 * (sum(sum(Theta.^2)) + sum(sum(X.^2)));
+J = 1 / 2 * sum(sum(Resi .^ 2)) + reguCost;
 
+reguX = lambda * X;
+reguTheta = lambda * Theta;
 
-
-
+X_grad = Resi * Theta + reguX;
+Theta_grad = Resi' * X + reguTheta;
 
 
 

@@ -23,6 +23,33 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+C = 1;
+sigma = 0.1;
+# 時間がかかるのでコメントアウト
+if 0
+  
+# いいモデルを探す。
+Ccands = [0.01 0.03 0.1 0.3 1 3 10 30];
+sigmaCands = [0.01 0.03 0.1 0.3 1 3 10 30];
+isFirst = 1;
+bestModelError = 0;
+for c = Ccands
+  for s = sigmaCands
+    # モデルを作る
+    model = svmTrain(X, y, c, @(x1, x2) gaussianKernel(x1, x2, s));
+    # cvの予測結果を取得する
+    predictions = svmPredict(model, Xval);
+    error = mean(double(predictions ~= yval));
+    if isFirst || bestModelError > error
+      isFirst = 0;
+      bestModelError = error;
+      C = c
+      sigma = s
+    endif
+  endfor
+endfor  
+endif
+
 
 
 

@@ -26,7 +26,10 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
+for i = 1:K
+  bitarr = idx == i;
+  centroids(i, :) = 1 / sum(bitarr) * sum(bitarr .* X, 1);
+endfor
 
 
 
